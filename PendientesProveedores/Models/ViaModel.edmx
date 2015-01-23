@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VIA_DRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'VIA_DR.dbo.CONVENIOS_UTILITY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CONVENIOS_UTILITY">
+          <Key>
+            <PropertyRef Name="CONVENIO_UTILITY_ID" />
+            <PropertyRef Name="UTILITY_ID" />
+            <PropertyRef Name="NUMERO_CONVENIO" />
+            <PropertyRef Name="PRODUCTO_ID" />
+            <PropertyRef Name="ALIAS_CONVENIO" />
+          </Key>
+          <Property Name="CONVENIO_UTILITY_ID" Type="int" Nullable="false" />
+          <Property Name="UTILITY_ID" Type="int" Nullable="false" />
+          <Property Name="NUMERO_CONVENIO" Type="int" Nullable="false" />
+          <Property Name="PRODUCTO_ID" Type="int" Nullable="false" />
+          <Property Name="ALIAS_CONVENIO" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ACTIVO_VENTAS" Type="bit" />
+          <Property Name="LOCAL_GRUPO_CONVENIO" Type="int" />
+          <Property Name="LOCAL_TIPO_PRODUCTO" Type="int" />
+        </EntityType>
+        <EntityType Name="Local_Grupo_Convenio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Grupo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Local_Pendientes_Proveedores">
+          <Key>
+            <PropertyRef Name="Pendiente_proveedor_id" />
+          </Key>
+          <Property Name="FECHA" Type="date" Nullable="false" />
+          <Property Name="UTILITY_ID" Type="int" Nullable="false" />
+          <Property Name="PENDIENTE_PAGO" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PENDIENTE_COBRO" Type="numeric" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Pendiente_proveedor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UTILITIES">
+          <Key>
+            <PropertyRef Name="RAZON_SOCIAL" />
+          </Key>
+          <Property Name="UTILITY_ID" Type="int" />
+          <Property Name="CODIGO_UTILITY" Type="int" />
+          <Property Name="RAZON_SOCIAL" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="GIRO_COMERCIAL" Type="varchar" MaxLength="5" />
+          <Property Name="RUT" Type="int" />
+          <Property Name="DV_RUT" Type="varchar" MaxLength="1" />
+          <Property Name="FONOS" Type="varchar" MaxLength="20" />
+          <Property Name="FAX" Type="varchar" MaxLength="20" />
+          <Property Name="COMUNA_CODE" Type="varchar" MaxLength="10" />
+          <Property Name="CIUDAD_CODE" Type="varchar" MaxLength="10" />
+          <Property Name="REGION_CODE" Type="varchar" MaxLength="2" />
+          <Property Name="CALLE" Type="varchar" MaxLength="40" />
+          <Property Name="NUMERO_DIR" Type="varchar" MaxLength="8" />
+          <Property Name="DEPTO_DIR" Type="varchar" MaxLength="8" />
+          <Property Name="CODIGO_POSTAL" Type="varchar" MaxLength="10" />
+          <Property Name="SITIO_INTERNET" Type="varchar" MaxLength="40" />
+          <Property Name="CORREO_ELECTRONICO" Type="varchar" MaxLength="40" />
+          <Property Name="CUENTA_SUN" Type="int" />
+        </EntityType>
+        <EntityContainer Name="VIA_DRModelStoreContainer">
+          <EntitySet Name="Local_Grupo_Convenio" EntityType="Self.Local_Grupo_Convenio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Local_Pendientes_Proveedores" EntityType="Self.Local_Pendientes_Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UTILITIES" EntityType="Self.UTILITIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONVENIOS_UTILITY" EntityType="Self.CONVENIOS_UTILITY" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CONVENIOS_UTILITY].[CONVENIO_UTILITY_ID] AS [CONVENIO_UTILITY_ID], 
+    [CONVENIOS_UTILITY].[UTILITY_ID] AS [UTILITY_ID], 
+    [CONVENIOS_UTILITY].[NUMERO_CONVENIO] AS [NUMERO_CONVENIO], 
+    [CONVENIOS_UTILITY].[PRODUCTO_ID] AS [PRODUCTO_ID], 
+    [CONVENIOS_UTILITY].[ALIAS_CONVENIO] AS [ALIAS_CONVENIO], 
+    [CONVENIOS_UTILITY].[ACTIVO_VENTAS] AS [ACTIVO_VENTAS], 
+    [CONVENIOS_UTILITY].[LOCAL_GRUPO_CONVENIO] AS [LOCAL_GRUPO_CONVENIO], 
+    [CONVENIOS_UTILITY].[LOCAL_TIPO_PRODUCTO] AS [LOCAL_TIPO_PRODUCTO]
+    FROM [dbo].[CONVENIOS_UTILITY] AS [CONVENIOS_UTILITY]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VIA_DRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Local_Grupo_Convenio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Local_Pendientes_Proveedores">
+          <Key>
+            <PropertyRef Name="Pendiente_proveedor_id" />
+          </Key>
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UTILITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="PENDIENTE_PAGO" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PENDIENTE_COBRO" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pendiente_proveedor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="UTILITIES">
+          <Key>
+            <PropertyRef Name="RAZON_SOCIAL" />
+          </Key>
+          <Property Name="UTILITY_ID" Type="Int32" />
+          <Property Name="CODIGO_UTILITY" Type="Int32" />
+          <Property Name="RAZON_SOCIAL" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GIRO_COMERCIAL" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="RUT" Type="Int32" />
+          <Property Name="DV_RUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FONOS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FAX" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="COMUNA_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CIUDAD_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_CODE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CALLE" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO_DIR" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DEPTO_DIR" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGO_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SITIO_INTERNET" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO_ELECTRONICO" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="CUENTA_SUN" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CONVENIOS_UTILITY">
+          <Key>
+            <PropertyRef Name="CONVENIO_UTILITY_ID" />
+            <PropertyRef Name="UTILITY_ID" />
+            <PropertyRef Name="NUMERO_CONVENIO" />
+            <PropertyRef Name="PRODUCTO_ID" />
+            <PropertyRef Name="ALIAS_CONVENIO" />
+          </Key>
+          <Property Name="CONVENIO_UTILITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="UTILITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO_CONVENIO" Type="Int32" Nullable="false" />
+          <Property Name="PRODUCTO_ID" Type="Int32" Nullable="false" />
+          <Property Name="ALIAS_CONVENIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACTIVO_VENTAS" Type="Boolean" />
+          <Property Name="LOCAL_GRUPO_CONVENIO" Type="Int32" />
+          <Property Name="LOCAL_TIPO_PRODUCTO" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="VIA_DREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Local_Grupo_Convenio" EntityType="Self.Local_Grupo_Convenio" />
+          <EntitySet Name="Local_Pendientes_Proveedores" EntityType="Self.Local_Pendientes_Proveedores" />
+          <EntitySet Name="UTILITIES" EntityType="Self.UTILITIES" />
+          <EntitySet Name="CONVENIOS_UTILITY" EntityType="Self.CONVENIOS_UTILITY" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VIA_DRModelStoreContainer" CdmEntityContainer="VIA_DREntities">
+          <EntitySetMapping Name="Local_Grupo_Convenio">
+            <EntityTypeMapping TypeName="VIA_DRModel.Local_Grupo_Convenio">
+              <MappingFragment StoreEntitySet="Local_Grupo_Convenio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Local_Pendientes_Proveedores">
+            <EntityTypeMapping TypeName="VIA_DRModel.Local_Pendientes_Proveedores">
+              <MappingFragment StoreEntitySet="Local_Pendientes_Proveedores">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="UTILITY_ID" ColumnName="UTILITY_ID" />
+                <ScalarProperty Name="PENDIENTE_PAGO" ColumnName="PENDIENTE_PAGO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="Pendiente_proveedor_id" ColumnName="Pendiente_proveedor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UTILITIES">
+            <EntityTypeMapping TypeName="VIA_DRModel.UTILITIES">
+              <MappingFragment StoreEntitySet="UTILITIES">
+                <ScalarProperty Name="UTILITY_ID" ColumnName="UTILITY_ID" />
+                <ScalarProperty Name="CODIGO_UTILITY" ColumnName="CODIGO_UTILITY" />
+                <ScalarProperty Name="RAZON_SOCIAL" ColumnName="RAZON_SOCIAL" />
+                <ScalarProperty Name="GIRO_COMERCIAL" ColumnName="GIRO_COMERCIAL" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="DV_RUT" ColumnName="DV_RUT" />
+                <ScalarProperty Name="FONOS" ColumnName="FONOS" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="COMUNA_CODE" ColumnName="COMUNA_CODE" />
+                <ScalarProperty Name="CIUDAD_CODE" ColumnName="CIUDAD_CODE" />
+                <ScalarProperty Name="REGION_CODE" ColumnName="REGION_CODE" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="NUMERO_DIR" ColumnName="NUMERO_DIR" />
+                <ScalarProperty Name="DEPTO_DIR" ColumnName="DEPTO_DIR" />
+                <ScalarProperty Name="CODIGO_POSTAL" ColumnName="CODIGO_POSTAL" />
+                <ScalarProperty Name="SITIO_INTERNET" ColumnName="SITIO_INTERNET" />
+                <ScalarProperty Name="CORREO_ELECTRONICO" ColumnName="CORREO_ELECTRONICO" />
+                <ScalarProperty Name="CUENTA_SUN" ColumnName="CUENTA_SUN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONVENIOS_UTILITY">
+            <EntityTypeMapping TypeName="VIA_DRModel.CONVENIOS_UTILITY">
+              <MappingFragment StoreEntitySet="CONVENIOS_UTILITY">
+                <ScalarProperty Name="CONVENIO_UTILITY_ID" ColumnName="CONVENIO_UTILITY_ID" />
+                <ScalarProperty Name="UTILITY_ID" ColumnName="UTILITY_ID" />
+                <ScalarProperty Name="NUMERO_CONVENIO" ColumnName="NUMERO_CONVENIO" />
+                <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
+                <ScalarProperty Name="ALIAS_CONVENIO" ColumnName="ALIAS_CONVENIO" />
+                <ScalarProperty Name="ACTIVO_VENTAS" ColumnName="ACTIVO_VENTAS" />
+                <ScalarProperty Name="LOCAL_GRUPO_CONVENIO" ColumnName="LOCAL_GRUPO_CONVENIO" />
+                <ScalarProperty Name="LOCAL_TIPO_PRODUCTO" ColumnName="LOCAL_TIPO_PRODUCTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
