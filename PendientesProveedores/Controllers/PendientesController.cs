@@ -42,7 +42,6 @@ namespace PendientesProveedores.Controllers
         {
             var proveedores = from u in db.UTILITIES select u.UTILITY_ID;
             var viewModel = new Local_Pendientes_Proveedores();
-            //viewModel.listaProveedores = new SelectList(proveedores, "UTILITY_ID", "UTILITY_ID");
             viewModel.listaProveedores = new SelectList(proveedores);
             
 

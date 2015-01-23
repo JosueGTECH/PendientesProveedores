@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d49b6c0b05bd449e805d4729103227b4" Name="Diagram1">
+      <Diagram DiagramId="9e3c02586884488cb0d45b1cd00dd0b6" Name="Diagram1">
         <EntityTypeShape EntityType="VIA_DRModel.Local_Grupo_Convenio" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VIA_DRModel.Local_Pendientes_Proveedores" Width="2.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VIA_DRModel.Local_Pendientes_Proveedores" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VIA_DRModel.UTILITIES" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="VIA_DRModel.CONVENIOS_UTILITY" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
       </Diagram>

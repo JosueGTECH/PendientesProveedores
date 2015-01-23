@@ -11,6 +11,8 @@ namespace PendientesProveedores.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web.Mvc;
     
     public partial class Local_Pendientes_Proveedores
     {
@@ -20,5 +22,10 @@ namespace PendientesProveedores.Models
         public decimal PENDIENTE_COBRO { get; set; }
         public string ESTADO { get; set; }
         public int Pendiente_proveedor_id { get; set; }
+
+        [NotMapped]
+        public int proveedorSeleccionado { get; set; }
+        [NotMapped]
+        public SelectList listaProveedores { get; set; }
     }
 }
