@@ -24,7 +24,7 @@ namespace PendientesProveedores.Models
         public int Pendiente_proveedor_id { get; set; }
 
         [NotMapped]
-        public int proveedorSeleccionado { get; set; }
+        public String proveedorSeleccionado { get; set; }
         [NotMapped]
         public SelectList listaProveedores { get; set; }
     }

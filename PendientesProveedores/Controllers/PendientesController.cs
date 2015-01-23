@@ -40,10 +40,11 @@ namespace PendientesProveedores.Controllers
         // GET: Pendientes/Create
         public ActionResult Create()
         {
-            var proveedores = from u in db.UTILITIES select u.UTILITY_ID;
+            //SELECT L.Grupo, L.id  FROM CONVENIOS_UTILITY AS [U] JOIN Local_Grupo_Convenio AS [L] ON U.LOCAL_GRUPO_CONVENIO = L.id group by l.Grupo, l.id
+
+            var proveedores = from l in db.Local_Grupo_Convenio join u in db.CONVENIOS_UTILITY on l.id equals u.LOCAL_GRUPO_CONVENIO select l.Grupo;
             var viewModel = new Local_Pendientes_Proveedores();
             viewModel.listaProveedores = new SelectList(proveedores);
-            
 
             return View(viewModel);
         }
@@ -64,7 +65,15 @@ namespace PendientesProveedores.Controllers
                 {
                     //agregar estado por default 'NO PAGADA'
                     string estadoDefault = "NO PAGADO";
+                    string proveedorSeleccionado = local_Pendientes_Proveedores.proveedorSeleccionado;
+
                     local_Pendientes_Proveedores.ESTADO = estadoDefault;
+                    
+                    //buscar proveedor por proveedorSeleccionado
+                    var proveedor = from l in db.Local_Grupo_Convenio where l.Grupo == proveedorSeleccionado select l.id; 
+
+                    //asignar proveedor
+                    local_Pendientes_Proveedores.UTILITY_ID = proveedor.First();
                     db.Local_Pendientes_Proveedores.Add(local_Pendientes_Proveedores);
                     db.SaveChanges();
                     return RedirectToAction("Index");
