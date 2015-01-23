@@ -54,8 +54,15 @@ namespace PendientesProveedores.Controllers
         public ActionResult Create()
         {
             var proveedores = from l in db.Local_Grupo_Convenio join u in db.CONVENIOS_UTILITY on l.id equals u.LOCAL_GRUPO_CONVENIO select l.Grupo;
+            var proveedoresAgrupados = from l in db.Local_Grupo_Convenio group l by l.Grupo into g select g;
             var viewModel = new Local_Pendientes_Proveedores();
-            viewModel.listaProveedores = new SelectList(proveedores);
+            var listaProveedores = new List<string>();
+            foreach (var p in proveedoresAgrupados)
+            {
+                listaProveedores.Add(p.Key);
+            }
+
+            viewModel.listaProveedores = new SelectList(listaProveedores);
 
             return View(viewModel);
         }
@@ -165,7 +172,7 @@ namespace PendientesProveedores.Controllers
         // POST: Pendientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(DateTime id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Local_Pendientes_Proveedores local_Pendientes_Proveedores = db.Local_Pendientes_Proveedores.Find(id);
             db.Local_Pendientes_Proveedores.Remove(local_Pendientes_Proveedores);
