@@ -18,8 +18,21 @@ namespace PendientesProveedores.Controllers
         // GET: Pendientes
         public ActionResult Index()
         {
+            var listadoProveedores = db.Local_Pendientes_Proveedores;
+
+            //sustituir Utility ID por Nombre del grupo
+
+            foreach (var v in listadoProveedores)
+            {
+                var grupo = from l in db.Local_Grupo_Convenio where l.id == v.UTILITY_ID select l.Grupo;
+                var probando = grupo.Cast<string>().First();
+                v.proveedorSeleccionado = probando;
+                Console.WriteLine(v.proveedorSeleccionado);
+            }
             
-            return View(db.Local_Pendientes_Proveedores.ToList());
+
+
+            return View(listadoProveedores.ToList());
         }
 
         // GET: Pendientes/Details/5
@@ -40,8 +53,6 @@ namespace PendientesProveedores.Controllers
         // GET: Pendientes/Create
         public ActionResult Create()
         {
-            //SELECT L.Grupo, L.id  FROM CONVENIOS_UTILITY AS [U] JOIN Local_Grupo_Convenio AS [L] ON U.LOCAL_GRUPO_CONVENIO = L.id group by l.Grupo, l.id
-
             var proveedores = from l in db.Local_Grupo_Convenio join u in db.CONVENIOS_UTILITY on l.id equals u.LOCAL_GRUPO_CONVENIO select l.Grupo;
             var viewModel = new Local_Pendientes_Proveedores();
             viewModel.listaProveedores = new SelectList(proveedores);
