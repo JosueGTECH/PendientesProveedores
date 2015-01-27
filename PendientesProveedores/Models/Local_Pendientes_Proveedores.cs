@@ -11,11 +11,14 @@ namespace PendientesProveedores.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web.Mvc;
     
     public partial class Local_Pendientes_Proveedores
     {
+        [Required(ErrorMessage = "Debe Introducir una fecha")]
+        [DataType(DataType.DateTime, ErrorMessage = "Debe ser una fecha que sea valida")]
         public System.DateTime FECHA { get; set; }
         public int UTILITY_ID { get; set; }
         public decimal PENDIENTE_PAGO { get; set; }
@@ -24,7 +27,7 @@ namespace PendientesProveedores.Models
         public int Pendiente_proveedor_id { get; set; }
 
         [NotMapped]
-        public String proveedorSeleccionado { get; set; }
+        public IEnumerable<SelectListItem> proveedorSeleccionado { get; set; }
         [NotMapped]
         public SelectList listaProveedores { get; set; }
     }

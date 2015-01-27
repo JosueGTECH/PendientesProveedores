@@ -26,7 +26,7 @@ namespace PendientesProveedores.Controllers
             {
                 var grupo = from l in db.Local_Grupo_Convenio where l.id == v.UTILITY_ID select l.Grupo;
                 var probando = grupo.Cast<string>().First();
-                v.proveedorSeleccionado = probando;
+                //v.proveedorSeleccionado = probando;
                 Console.WriteLine(v.proveedorSeleccionado);
             }
             
@@ -63,6 +63,10 @@ namespace PendientesProveedores.Controllers
             }
 
             viewModel.listaProveedores = new SelectList(listaProveedores);
+            //Obteniendo fecha actual
+            String fechaActual = DateTime.Now.Date.ToShortDateString();
+            viewModel.FECHA = DateTime.Parse(fechaActual);
+            
 
             return View(viewModel);
         }
@@ -83,12 +87,12 @@ namespace PendientesProveedores.Controllers
                 {
                     //agregar estado por default 'NO PAGADA'
                     string estadoDefault = "NO PAGADO";
-                    string proveedorSeleccionado = local_Pendientes_Proveedores.proveedorSeleccionado;
+                    IEnumerable<SelectListItem> proveedorSeleccionado = local_Pendientes_Proveedores.proveedorSeleccionado;
 
                     local_Pendientes_Proveedores.ESTADO = estadoDefault;
                     
                     //buscar proveedor por proveedorSeleccionado
-                    var proveedor = from l in db.Local_Grupo_Convenio where l.Grupo == proveedorSeleccionado select l.id; 
+                    var proveedor = from l in db.Local_Grupo_Convenio where l.Grupo == proveedorSeleccionado.ToString() select l.id; 
 
                     //asignar proveedor
                     local_Pendientes_Proveedores.UTILITY_ID = proveedor.First();
@@ -113,7 +117,21 @@ namespace PendientesProveedores.Controllers
 
             }
 
-            return View(local_Pendientes_Proveedores);
+            var proveedores = from l in db.Local_Grupo_Convenio join u in db.CONVENIOS_UTILITY on l.id equals u.LOCAL_GRUPO_CONVENIO select l.Grupo;
+            var proveedoresAgrupados = from l in db.Local_Grupo_Convenio group l by l.Grupo into g select g;
+            var viewModel = new Local_Pendientes_Proveedores();
+            var listaProveedores = new List<string>();
+            foreach (var p in proveedoresAgrupados)
+            {
+                listaProveedores.Add(p.Key);
+            }
+
+            viewModel.listaProveedores = new SelectList(listaProveedores);
+            //Obteniendo fecha actual
+            String fechaActual = DateTime.Now.Date.ToShortDateString();
+            viewModel.FECHA = DateTime.Parse(fechaActual);
+            
+            return View(viewModel);
         }
 
         // GET: Pendientes/Edit/5
