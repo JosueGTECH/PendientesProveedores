@@ -54,7 +54,7 @@
     <div class="table" id="t01">
         @Html.Grid(Model).Columns(columns =>
             {
-                columns.Add(c => c.FECHA).Titled("Fecha").Filterable(true);
+                columns.Add(c => c.formatoFecha).Titled("Fecha").Filterable(true);
                 columns.Add(c => c.proveedorSeleccionado).Titled("Proveedor").Filterable(true);
                 columns.Add(c => c.PENDIENTE_PAGO).Titled("Pendiente de Pago");
                 columns.Add(c => c.PENDIENTE_COBRO).Titled("Pendiente de Cobro");

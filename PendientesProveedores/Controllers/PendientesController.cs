@@ -155,8 +155,11 @@ namespace PendientesProveedores.Controllers
                 }
                 var grupo = from l in db.Local_Grupo_Convenio where l.id == local_Pendientes_Proveedores.UTILITY_ID select l.Grupo;
                 var proveedor = grupo.Cast<string>().First();
+                var fecha = from lp in db.Local_Pendientes_Proveedores where lp.Pendiente_proveedor_id == id select lp.FECHA;
 
                 local_Pendientes_Proveedores.proveedorSeleccionado = proveedor;
+                local_Pendientes_Proveedores.FECHA = fecha.Cast<DateTime>().First(); ;
+
                 return View(local_Pendientes_Proveedores);
             }
             return View();

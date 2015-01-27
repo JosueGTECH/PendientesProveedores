@@ -13,13 +13,23 @@ namespace PendientesProveedores.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Globalization;
     using System.Web.Mvc;
     
     public partial class Local_Pendientes_Proveedores
     {
         [Required(ErrorMessage = "Debe Introducir una fecha")]
-        [DataType(DataType.DateTime, ErrorMessage = "Debe ser una fecha que sea valida")]
+        [DataType(DataType.Date, ErrorMessage = "Debe ser una fecha que sea valida")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime FECHA { get; set; }
+        public string formatoFecha
+        {
+            get
+            {
+                return FECHA.ToShortDateString();
+            }
+        }
+
         public int UTILITY_ID { get; set; }
 
         [Required(ErrorMessage = "Debe Introducir un monto para Pendiente de Pago")]
