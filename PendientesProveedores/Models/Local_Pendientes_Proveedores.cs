@@ -21,13 +21,19 @@ namespace PendientesProveedores.Models
         [DataType(DataType.DateTime, ErrorMessage = "Debe ser una fecha que sea valida")]
         public System.DateTime FECHA { get; set; }
         public int UTILITY_ID { get; set; }
+
+        [Required(ErrorMessage = "Debe Introducir un monto para Pendiente de Pago")]
+        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Formato de monto inválido")]
         public decimal PENDIENTE_PAGO { get; set; }
+
+        [Required(ErrorMessage = "Debe Introducir un monto para Pendiente de Cobro")]
+        [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Formato de monto inválido")]
         public decimal PENDIENTE_COBRO { get; set; }
         public string ESTADO { get; set; }
         public int Pendiente_proveedor_id { get; set; }
 
         [NotMapped]
-        public IEnumerable<SelectListItem> proveedorSeleccionado { get; set; }
+        public string proveedorSeleccionado { get; set; }
         [NotMapped]
         public SelectList listaProveedores { get; set; }
     }

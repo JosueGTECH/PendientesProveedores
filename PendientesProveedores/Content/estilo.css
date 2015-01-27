@@ -1,0 +1,10 @@
+﻿body {
+    padding-left: 50px;
+    padding-top: 30px;
+}
+
+#msform{
+    width: 400px;
+    background-color: lightgray;
+    padding: 30px 30px 10px 10px;
+}

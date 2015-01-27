@@ -1,37 +1,107 @@
 ﻿@model IEnumerable<PendientesProveedores.Models.Local_Pendientes_Proveedores>
+@using GridMvc.Html
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pendientes Proveedores";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<head>
+    <style>
+        table {
+            width: 100%;
+            margin-top: 80px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+
+        table#t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t01 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t01 th {
+            background-color: black;
+            color: white;
+        }
+
+        /*table#t01 tr:last-child {
+            background-color: black;
+            color: white;
+        }*/
+    </style>
+</head>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Agregar Nuevo", "Create", "Pendientes", new { @class = "fa fa-plus-circle fa-lg" })
 </p>
-<table class="table">
-    <tr>
-        <th>FECHA</th>
-        <th>PROVEEDOR</th>
-        <th>PENDIENTE COBRO</th>
-        <th>PENDIENTE PAGO</th>
-        <th>ESTADO</th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@item.FECHA</td>
-        <td>@item.proveedorSeleccionado</td>
-        <td>@item.PENDIENTE_COBRO</td>
-        <td>@item.PENDIENTE_PAGO</td>
-        <td>@item.ESTADO</td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = @item.Pendiente_proveedor_id }) |
-            @*@Html.ActionLink("Details", "Details", new { id = @item.Pendiente_proveedor_id }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id = @item.Pendiente_proveedor_id })
-        </td>
-    </tr>
-}
+@if(Model != null)
+{
 
-</table>
+    <div class="table" id="t01">
+        @Html.Grid(Model).Columns(columns =>
+            {
+                columns.Add(c => c.FECHA).Titled("Fecha").Filterable(true);
+                columns.Add(c => c.proveedorSeleccionado).Titled("Proveedor").Filterable(true);
+                columns.Add(c => c.PENDIENTE_PAGO).Titled("Pendiente de Pago");
+                columns.Add(c => c.PENDIENTE_COBRO).Titled("Pendiente de Cobro");
+                columns.Add(c => c.ESTADO).Titled("Estado");
+                columns.Add()
+                             .Sanitized(false)
+                             .Encoded(false)
+                             .RenderValueAs(o => Html.ActionLink(" ", "Edit", "Pendientes", new { id = o.Pendiente_proveedor_id }, new { @class = "fa fa-pencil fa-lg" }).ToHtmlString());
+               
+                columns.Add()
+                        .Sanitized(false)
+                        .Encoded(false)
+                        .RenderValueAs(o => Html.ActionLink(" ", "Delete", "Pendientes", new { id = o.Pendiente_proveedor_id }, new { @class = "fa fa-trash fa-lg" }).ToHtmlString());
+            }).WithPaging(10).Sortable(true)
+
+    </div>
+        @*<table class="table">
+            <tr>
+                <th>FECHA</th>
+                <th>PROVEEDOR</th>
+                <th>PENDIENTE COBRO</th>
+                <th>PENDIENTE PAGO</th>
+                <th>ESTADO</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FECHA</td>
+                    <td>@item.proveedorSeleccionado</td>
+                    <td>@item.PENDIENTE_COBRO</td>
+                    <td>@item.PENDIENTE_PAGO</td>
+                    <td>@item.ESTADO</td>
+                    <td>*@
+                        @*@Html.ActionLink("Edit", "Edit", new { id = @item.Pendiente_proveedor_id }) |*@
+                        @*@Html.ActionLink("Details", "Details", new { id = @item.Pendiente_proveedor_id }) |*@
+                        @*@Html.ActionLink("Delete", "Delete", new { id = @item.Pendiente_proveedor_id })*@
+                    @*</td>
+                </tr>
+            }
+
+        </table>*@
+        }
+        else
+        {
+        <br /><br /><br />
+        <div class="alert alert-warning" role="alert"><strong><i class="glyphicon glyphicon-warning-sign"></i>  No Hay Facturas Registradas.</strong><br /></div>
+
+        }
+

@@ -20,19 +20,20 @@ namespace PendientesProveedores.Controllers
         {
             var listadoProveedores = db.Local_Pendientes_Proveedores;
 
-            //sustituir Utility ID por Nombre del grupo
-
-            foreach (var v in listadoProveedores)
+            if (listadoProveedores.Any())
             {
-                var grupo = from l in db.Local_Grupo_Convenio where l.id == v.UTILITY_ID select l.Grupo;
-                var probando = grupo.Cast<string>().First();
-                //v.proveedorSeleccionado = probando;
-                Console.WriteLine(v.proveedorSeleccionado);
+                foreach (var v in listadoProveedores)
+                {
+                    var grupo = from l in db.Local_Grupo_Convenio where l.id == v.UTILITY_ID select l.Grupo;
+                    var proveedor = grupo.Cast<string>().First();
+                    v.proveedorSeleccionado = proveedor;
+                    v.FECHA = v.FECHA.Date;
+                }
+                return View(listadoProveedores.ToList());
             }
+
+            return View();
             
-
-
-            return View(listadoProveedores.ToList());
         }
 
         // GET: Pendientes/Details/5
@@ -57,6 +58,7 @@ namespace PendientesProveedores.Controllers
             var proveedoresAgrupados = from l in db.Local_Grupo_Convenio group l by l.Grupo into g select g;
             var viewModel = new Local_Pendientes_Proveedores();
             var listaProveedores = new List<string>();
+
             foreach (var p in proveedoresAgrupados)
             {
                 listaProveedores.Add(p.Key);
@@ -87,7 +89,7 @@ namespace PendientesProveedores.Controllers
                 {
                     //agregar estado por default 'NO PAGADA'
                     string estadoDefault = "NO PAGADO";
-                    IEnumerable<SelectListItem> proveedorSeleccionado = local_Pendientes_Proveedores.proveedorSeleccionado;
+                    string proveedorSeleccionado = local_Pendientes_Proveedores.proveedorSeleccionado;
 
                     local_Pendientes_Proveedores.ESTADO = estadoDefault;
                     
@@ -151,6 +153,10 @@ namespace PendientesProveedores.Controllers
                 {
                     return HttpNotFound();
                 }
+                var grupo = from l in db.Local_Grupo_Convenio where l.id == local_Pendientes_Proveedores.UTILITY_ID select l.Grupo;
+                var proveedor = grupo.Cast<string>().First();
+
+                local_Pendientes_Proveedores.proveedorSeleccionado = proveedor;
                 return View(local_Pendientes_Proveedores);
             }
             return View();
@@ -163,9 +169,13 @@ namespace PendientesProveedores.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Local_Pendientes_Proveedores local_Pendientes_Proveedores)
         {
+            var fechaVieja = from lp in db.Local_Pendientes_Proveedores where lp.Pendiente_proveedor_id == id select lp.FECHA;
+            var utilityViejo = from lp in db.Local_Pendientes_Proveedores where lp.Pendiente_proveedor_id == id select lp.UTILITY_ID;
             if (ModelState.IsValid)
             {
                 db.Entry(local_Pendientes_Proveedores).State = EntityState.Modified;
+                local_Pendientes_Proveedores.FECHA = fechaVieja.Cast<DateTime>().First(); 
+                local_Pendientes_Proveedores.UTILITY_ID = utilityViejo.Cast<int>().First();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
