@@ -104,6 +104,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Grid.mvc.readme" />
     <EntityDeploy Include="Models\ViaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ViaModel.Designer.cs</LastGenOutput>
@@ -121,7 +122,6 @@
       <DependentUpon>ViaModel.edmx</DependentUpon>
       <LastGenOutput>ViaModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Grid.mvc.readme" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -15,7 +15,7 @@ namespace PendientesProveedores.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Globalization;
     using System.Web.Mvc;
-    
+
     public partial class Local_Pendientes_Proveedores
     {
         [Required(ErrorMessage = "Debe Introducir una fecha")]
@@ -30,7 +30,7 @@ namespace PendientesProveedores.Models
             }
         }
 
-        public int UTILITY_ID { get; set; }
+        public int LOCAL_GRUPO_CONVENIO { get; set; }
 
         [Required(ErrorMessage = "Debe Introducir un monto para Pendiente de Pago")]
         [RegularExpression(@"\d+(\.\d{1,2})?", ErrorMessage = "Formato de monto inválido")]

@@ -19,17 +19,17 @@
         @Html.LabelFor(model => model.FECHA, "Fecha", htmlAttributes: new { @class = "control-label col-md-6" })
         <div class="form-group">
             <div class="col-md-6">
-                @Html.EditorFor(model => model.FECHA, new { htmlAttributes = new { type = "date", @class = "form-control" } })                
+                @Html.EditorFor(model => model.FECHA, new { htmlAttributes = new { @class = "form-control" } })  
             </div>
             @Html.ValidationMessageFor(model => model.FECHA, "", new { @class = "text-danger col-md-12 text-center" })
         </div>
 
-        @Html.LabelFor(model => model.UTILITY_ID, "Proveedor", htmlAttributes: new { @class = "control-label col-md-6" })
+        @Html.LabelFor(model => model.LOCAL_GRUPO_CONVENIO, "Proveedor", htmlAttributes: new { @class = "control-label col-md-6" })
         <div class="form-group">
             <div class="col-md-4">
-                @Html.DropDownListFor(model => Model.proveedorSeleccionado, Model.listaProveedores)
-            </div>          
-              @Html.ValidationMessageFor(model => model.UTILITY_ID, "", new { @class = "text-danger col-md-12" })
+                @Html.DropDownListFor(model => Model.proveedorSeleccionado, Model.listaProveedores, new { htmlAttributes = new { @class = "dropdown-menu" } })
+            </div>
+              @Html.ValidationMessageFor(model => model.LOCAL_GRUPO_CONVENIO, "", new { @class = "text-danger col-md-12" })
         </div>
 
         @Html.LabelFor(model => model.PENDIENTE_PAGO, "Pendiente de Pago", htmlAttributes: new { @class = "control-label col-md-6" })
@@ -40,7 +40,7 @@
             @Html.ValidationMessageFor(model => model.PENDIENTE_PAGO, "", new { @class = "text-danger col-md-12" })
         </div>
         @Html.LabelFor(model => model.PENDIENTE_COBRO, "Pendiente de Cobro", htmlAttributes: new { @class = "control-label col-md-6" })
-        <div class="form-group">            
+        <div class="form-group">
             <div class="col-md-4">
                 @Html.EditorFor(model => model.PENDIENTE_COBRO, new { htmlAttributes = new { @class = "form-control" } })
             </div>

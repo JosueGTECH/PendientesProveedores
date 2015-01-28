@@ -36,7 +36,7 @@ warning 6002: The table/view 'VIA_DR.dbo.CONVENIOS_UTILITY' does not have a prim
             <PropertyRef Name="Pendiente_proveedor_id" />
           </Key>
           <Property Name="FECHA" Type="date" Nullable="false" />
-          <Property Name="UTILITY_ID" Type="int" Nullable="false" />
+          <Property Name="LOCAL_GRUPO_CONVENIO" Type="int" Nullable="false" />
           <Property Name="PENDIENTE_PAGO" Type="numeric" Precision="12" Scale="2" Nullable="false" />
           <Property Name="PENDIENTE_COBRO" Type="numeric" Precision="12" Scale="2" Nullable="false" />
           <Property Name="ESTADO" Type="varchar" MaxLength="10" Nullable="false" />
@@ -99,7 +99,7 @@ warning 6002: The table/view 'VIA_DR.dbo.CONVENIOS_UTILITY' does not have a prim
             <PropertyRef Name="Pendiente_proveedor_id" />
           </Key>
           <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UTILITY_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOCAL_GRUPO_CONVENIO" Type="Int32" Nullable="false" />
           <Property Name="PENDIENTE_PAGO" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="PENDIENTE_COBRO" Type="Decimal" Precision="12" Scale="2" Nullable="false" />
           <Property Name="ESTADO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
@@ -169,7 +169,7 @@ warning 6002: The table/view 'VIA_DR.dbo.CONVENIOS_UTILITY' does not have a prim
             <EntityTypeMapping TypeName="VIA_DRModel.Local_Pendientes_Proveedores">
               <MappingFragment StoreEntitySet="Local_Pendientes_Proveedores">
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="UTILITY_ID" ColumnName="UTILITY_ID" />
+                <ScalarProperty Name="LOCAL_GRUPO_CONVENIO" ColumnName="LOCAL_GRUPO_CONVENIO" />
                 <ScalarProperty Name="PENDIENTE_PAGO" ColumnName="PENDIENTE_PAGO" />
                 <ScalarProperty Name="PENDIENTE_COBRO" ColumnName="PENDIENTE_COBRO" />
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />

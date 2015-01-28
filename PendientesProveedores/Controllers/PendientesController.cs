@@ -24,7 +24,7 @@ namespace PendientesProveedores.Controllers
             {
                 foreach (var v in listadoProveedores)
                 {
-                    var grupo = from l in db.Local_Grupo_Convenio where l.id == v.UTILITY_ID select l.Grupo;
+                    var grupo = from l in db.Local_Grupo_Convenio where l.id == v.LOCAL_GRUPO_CONVENIO select l.Grupo;
                     var proveedor = grupo.Cast<string>().First();
                     v.proveedorSeleccionado = proveedor;
                     v.FECHA = v.FECHA.Date;
@@ -97,7 +97,7 @@ namespace PendientesProveedores.Controllers
                     var proveedor = from l in db.Local_Grupo_Convenio where l.Grupo == proveedorSeleccionado.ToString() select l.id; 
 
                     //asignar proveedor
-                    local_Pendientes_Proveedores.UTILITY_ID = proveedor.First();
+                    local_Pendientes_Proveedores.LOCAL_GRUPO_CONVENIO = proveedor.First();
                     db.Local_Pendientes_Proveedores.Add(local_Pendientes_Proveedores);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -153,7 +153,7 @@ namespace PendientesProveedores.Controllers
                 {
                     return HttpNotFound();
                 }
-                var grupo = from l in db.Local_Grupo_Convenio where l.id == local_Pendientes_Proveedores.UTILITY_ID select l.Grupo;
+                var grupo = from l in db.Local_Grupo_Convenio where l.id == local_Pendientes_Proveedores.LOCAL_GRUPO_CONVENIO select l.Grupo;
                 var proveedor = grupo.Cast<string>().First();
                 var fecha = from lp in db.Local_Pendientes_Proveedores where lp.Pendiente_proveedor_id == id select lp.FECHA;
 
@@ -173,12 +173,12 @@ namespace PendientesProveedores.Controllers
         public ActionResult Edit(int id, Local_Pendientes_Proveedores local_Pendientes_Proveedores)
         {
             var fechaVieja = from lp in db.Local_Pendientes_Proveedores where lp.Pendiente_proveedor_id == id select lp.FECHA;
-            var utilityViejo = from lp in db.Local_Pendientes_Proveedores where lp.Pendiente_proveedor_id == id select lp.UTILITY_ID;
+            var utilityViejo = from lp in db.Local_Pendientes_Proveedores where lp.Pendiente_proveedor_id == id select lp.LOCAL_GRUPO_CONVENIO;
             if (ModelState.IsValid)
             {
                 db.Entry(local_Pendientes_Proveedores).State = EntityState.Modified;
                 local_Pendientes_Proveedores.FECHA = fechaVieja.Cast<DateTime>().First(); 
-                local_Pendientes_Proveedores.UTILITY_ID = utilityViejo.Cast<int>().First();
+                local_Pendientes_Proveedores.LOCAL_GRUPO_CONVENIO = utilityViejo.Cast<int>().First();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
